@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy — Tutor Manager</title>
+  <meta name="description" content="How Tutor Manager handles your data. Your students, lessons and amounts stay on your device, encrypted.">
+  <script>
+    // Pick the language before the page paints: ?lang= → #ar-… link → saved choice → device language.
+    (function () {
+      var lang;
+      try {
+        var p = new URLSearchParams(location.search).get('lang');
+        if (p === 'ar' || p === 'en') lang = p;
+      } catch (e) {}
+      if (!lang && /^#ar-/.test(location.hash)) lang = 'ar';
+      if (!lang) {
+        try {
+          var s = localStorage.getItem('lang');
+          if (s === 'ar' || s === 'en') lang = s;
+        } catch (e) {}
+      }
+      if (!lang) {
+        var l = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+        lang = /^ar\b/i.test(l) ? 'ar' : 'en';
+      }
+      var d = document.documentElement;
+      d.setAttribute('data-lang', lang);
+      d.lang = lang;
+      d.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      if (lang === 'ar') document.title = 'سياسة الخصوصية — مدير الدروس';
+    })();
+  </script>
+  <style>
+    :root {
+      --bg: #f7f7f5;
+      --surface: #ffffff;
+      --text: #1d1d1f;
+      --muted: #5f6368;
+      --border: #e3e3e0;
+      --accent: #2f6fdb;
+      --accent-soft: #eaf1fd;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121214;
+        --surface: #1c1c1f;
+        --text: #ececec;
+        --muted: #a0a0a8;
+        --border: #2e2e33;
+        --accent: #7aa7f5;
+        --accent-soft: #1f2a3d;
+      }
+    }
+
+    /* Without JS both languages show; with JS only the chosen one does. */
+    html[data-lang="en"] .lang-ar,
+    html[data-lang="ar"] .lang-en { display: none; }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      -webkit-text-size-adjust: 100%;
+    }
+    .lang-ar {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Arabic", "Geeza Pro", Tahoma, Arial, sans-serif;
+      line-height: 1.9;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .header-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 28px 20px 32px;
+    }
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    .app-name {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    /* Letter-spacing breaks Arabic letter joining. */
+    .lang-ar .app-name { letter-spacing: 0; font-size: 15px; }
+
+    .lang-switch {
+      flex-shrink: 0;
+      display: inline-block;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .lang-switch:hover {
+      text-decoration: none;
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .lang-switch[lang="ar"] {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans Arabic", "Geeza Pro", Tahoma, Arial, sans-serif;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.25;
+    }
+    .effective {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    .summary {
+      background: var(--accent-soft);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .summary h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+    .summary ul { margin: 0; }
+
+    nav.toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 32px 0 8px;
+    }
+    nav.toc h2 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+    nav.toc ol {
+      margin: 0;
+      padding-inline-start: 22px;
+      columns: 2;
+      column-gap: 32px;
+      font-size: 15px;
+    }
+    nav.toc li { break-inside: avoid; }
+
+    section { scroll-margin-top: 16px; }
+    h2 {
+      margin: 40px 0 12px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+    h3 {
+      margin: 24px 0 8px;
+      font-size: 17px;
+    }
+    p { margin: 0 0 14px; }
+    ul { margin: 0 0 14px; padding-inline-start: 22px; }
+    li { margin-bottom: 6px; }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .contact {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 24px;
+      margin-top: 16px;
+    }
+    .contact p { margin: 4px 0; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+      padding: 24px 20px 40px;
+    }
+
+    @media (max-width: 560px) {
+      h1 { font-size: 28px; }
+      .header-inner { padding: 20px 20px 24px; }
+      nav.toc ol { columns: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================== ENGLISH ============================== -->
+<div class="lang-en" lang="en" dir="ltr">
+  <header>
+    <div class="header-inner">
+      <div class="header-top">
+        <p class="app-name">Tutor Manager</p>
+        <a class="lang-switch" href="?lang=ar" data-set-lang="ar" lang="ar" hreflang="ar">العربية</a>
+      </div>
+      <h1>Privacy Policy</h1>
+      <p class="effective">Effective date: 10 September 2026</p>
+    </div>
+  </header>
+
+  <main>
+    <p>This policy explains how Faisal almulhem ("we", "us") handles data when you use the Tutor Manager app. The app helps tutors manage students, groups, lessons, attendance, payments, statements, reminders and reports. The app is not a school or an education provider, and it does not receive or hold lesson fees on behalf of the tutor or the student.</p>
+
+    <div class="summary">
+      <h2>Summary</h2>
+      <ul>
+        <li>Your students, lessons and amounts stay on your device, encrypted, and never reach us.</li>
+        <li>Signing in is optional. If you sign in, we receive only your email address and account ID.</li>
+        <li>Subscriptions go through the App Store or Google Play and are managed by RevenueCat, which never sees any of your students' data.</li>
+        <li>No ads, no tracking, no selling of data, and no analytics or crash-reporting tools.</li>
+      </ul>
+    </div>
+
+    <p>By using the app, the user acknowledges having read this policy. A tutor who enters a student's or a parent's data must make sure there is an appropriate legal basis for entering it, inform the person concerned of this policy, and obtain the parent's consent where required, especially when the student is a minor.</p>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#scope">Scope</a></li>
+        <li><a href="#roles">Roles and responsibilities</a></li>
+        <li><a href="#data">The data we handle</a></li>
+        <li><a href="#obtain">How we obtain data</a></li>
+        <li><a href="#purposes">Purposes of use</a></li>
+        <li><a href="#legal-basis">Legal basis for processing</a></li>
+        <li><a href="#children">Children's and minors' data</a></li>
+        <li><a href="#subscriptions">Subscriptions and in-store payments</a></li>
+        <li><a href="#notifications">Notifications and reminders</a></li>
+        <li><a href="#biometric">Fingerprint or face lock</a></li>
+        <li><a href="#export">Statements, export and sharing</a></li>
+        <li><a href="#sharing">Sharing data</a></li>
+        <li><a href="#storage">Storage, international transfer and backups</a></li>
+        <li><a href="#retention">Retention</a></li>
+        <li><a href="#security">Data security</a></li>
+        <li><a href="#rights">Rights of data subjects</a></li>
+        <li><a href="#delete">Deleting your account and data</a></li>
+        <li><a href="#cookies">Cookies</a></li>
+        <li><a href="#messages">Messages and communications</a></li>
+        <li><a href="#calendar">Calendar and countries</a></li>
+        <li><a href="#changes">Changes to this policy</a></li>
+        <li><a href="#contact">Governing law and contact</a></li>
+      </ol>
+    </nav>
+
+    <section id="scope">
+      <h2>1. Scope</h2>
+      <p>This policy applies to the Tutor Manager app and its related support services. It does not apply to external services the user reaches through links or separate apps — such as the messaging apps a tutor chooses to share statements through — which are governed by their own privacy policies.</p>
+    </section>
+
+    <section id="roles">
+      <h2>2. Roles and responsibilities</h2>
+      <p>For the tutor's account, subscription and technical-support data, we determine the purposes and means of processing and are responsible for it under applicable law.</p>
+      <p>The data a tutor enters to run their work — students, parents, lessons and amounts — is kept on the tutor's device only. We do not process it on any server of ours and cannot see it. The tutor alone decides why it is collected and how it is used, and remains responsible for its accuracy, for the lawfulness of entering it, and for deciding who may see it.</p>
+    </section>
+
+    <section id="data">
+      <h2>3. The data we handle</h2>
+
+      <h3>3.1 What stays on your device only — and never reaches us</h3>
+      <ul>
+        <li>The tutor's data in the app: the name chosen to appear on statements, the list of subjects the tutor teaches, and language, appearance, currency, notification and other preferences.</li>
+        <li>Students' and parents' data: the student's name and required phone number, the parent's phone number if the tutor enters it (optional), stage, grade, lesson price and standard duration, notes, groups, and the student's status (active, paused or archived).</li>
+        <li>Family linking: when the same parent number is used for more than one student, the app links the siblings on your device to prepare a detailed joint statement with a combined total.</li>
+        <li>Lessons and attendance: each lesson's date, time, duration, subject and type, whether it was rescheduled, and records of attendance, absence, cancellation and notes.</li>
+        <li>Financial data: amounts due and paid, payment methods and dates, individual and family statements, reports, and the PDF and Excel files produced from them.</li>
+      </ul>
+      <p>This data is kept in an encrypted database on your device and is not sent to any server of ours. These records are for management and documentation only; the app does not confirm that a payment actually took place, and it does not hold students' or tutors' money in any balance or wallet.</p>
+
+      <h3>3.2 What reaches us or our service providers</h3>
+      <ul>
+        <li>When you sign in — which is optional: your email address, account ID, sign-in method (email, Google or Apple), and your name if the sign-in provider supplies it. Signing in is not required to use any feature of the app.</li>
+        <li>When you subscribe: a technical subscriber ID (anonymous, or your account ID if you are signed in), the product purchased, the dates of purchase, renewal, expiry and cancellation, and store receipts. We never receive your card number or security code.</li>
+        <li>Technical data that naturally accompanies these requests: IP address, operating system type and version, app and library versions, device language and store country.</li>
+      </ul>
+
+      <h3>3.3 What we do not collect</h3>
+      <ul>
+        <li>We do not use analytics or crash-reporting tools, and we do not log usage events inside the app.</li>
+        <li>We do not collect advertising identifiers or track you across other apps or websites.</li>
+        <li>We do not request access to your location, contacts, camera or microphone.</li>
+      </ul>
+    </section>
+
+    <section id="obtain">
+      <h2>4. How we obtain data</h2>
+      <ul>
+        <li>Directly from the tutor when signing in or contacting support.</li>
+        <li>From the sign-in provider (Google or Apple) if the tutor chooses to sign in with it.</li>
+        <li>From the app store and RevenueCat, regarding purchase and subscription status.</li>
+      </ul>
+      <p>The data a tutor enters to run their work stays on their device, and we do not obtain it in any way.</p>
+    </section>
+
+    <section id="purposes">
+      <h2>5. Purposes of use</h2>
+      <ul>
+        <li>Creating and verifying the account when the tutor chooses to sign in.</li>
+        <li>Managing the subscription and checking entitlement, restoring purchases, moving the subscription with the account to another device, and preventing fraud.</li>
+        <li>Providing technical support and answering enquiries.</li>
+        <li>Protecting accounts and the security of the service.</li>
+        <li>Meeting legal obligations, responding to lawful requests, and protecting users' rights.</li>
+      </ul>
+      <p>Managing students, lessons and attendance, producing statements, reports and PDF files, scheduling reminders, and family linking all happen on the tutor's device without passing through us.</p>
+    </section>
+
+    <section id="legal-basis">
+      <h2>6. Legal basis for processing</h2>
+      <p>We process data to the extent needed to provide the service the user requests, on the basis of consent where consent is required, for legitimate interests such as app security and preventing misuse, and to meet legal obligations. The user may withdraw consent to processing that relies on it, without affecting the lawfulness of earlier processing or data that must be kept by law.</p>
+    </section>
+
+    <section id="children">
+      <h2>7. Children's and minors' data</h2>
+      <p>The app is intended for tutors, not for children to create their own accounts. A tutor may enter data about students who are minors to manage lessons; this data stays on the tutor's device and does not reach us. The tutor must limit it to what is necessary, inform the parent, and obtain the parent's consent where the law or the nature of the relationship requires it. We do not use students' data for any marketing or to build advertising profiles — and we have no access to it in the first place.</p>
+      <p>A parent who wants to review or delete a child's data should contact the tutor who entered it, because it is stored on the tutor's device. A parent may also write to us if that is not possible, and we will help as far as we can, within the limit that we do not hold that data.</p>
+    </section>
+
+    <section id="subscriptions">
+      <h2>8. Subscriptions and in-store payments</h2>
+      <p>Subscriptions are purchased through the Apple App Store or Google Play, and payment, renewal, cancellation and refunds are governed by the terms and policies of the relevant store. We use RevenueCat to manage subscription status and entitlements; it receives the technical subscriber ID and the product, purchase, renewal and cancellation data needed to operate the subscription — and nothing about your students or lessons.</p>
+      <p>You can subscribe without signing in, and restore your subscription after reinstalling the app using "Restore purchases". A subscription is cancelled from the store's subscription settings, not from inside the app.</p>
+    </section>
+
+    <section id="notifications">
+      <h2>9. Notifications and reminders</h2>
+      <p>Reminders are local: the app schedules them directly on your device, does not create a token for server-sent notifications, and does not send your schedule to anyone. You can choose the "private" style to hide students' names and amounts from the notification text on the lock screen, and you can turn notifications off in the app or device settings. Turning them off does not delete any appointment or record, but it stops the reminder from appearing. Delivery times may be affected by device settings and operating-system limits.</p>
+    </section>
+
+    <section id="biometric">
+      <h2>10. Fingerprint or face lock</h2>
+      <p>If the tutor turns on the biometric lock, the operating system performs the check (fingerprint, face or device passcode). The app never receives any biometric data, and none of it reaches us.</p>
+    </section>
+
+    <section id="export">
+      <h2>11. Statements, export and sharing</h2>
+      <p>Statements and PDF and Excel files are created on your device. They leave it only when the tutor chooses to share them through the system share menu — for example by sending them through a messaging app — at which point that app's policy applies. Temporary copies of exported files are deleted from the device automatically when the app is opened more than 12 hours after they were created.</p>
+    </section>
+
+    <section id="sharing">
+      <h2>12. Sharing data</h2>
+      <p>We do not sell personal data. We share only the minimum necessary with the following:</p>
+      <ul>
+        <li>Google Firebase, for signing in and verifying the account — it receives the email address, account ID and sign-in method.</li>
+        <li>Apple and Google, as sign-in providers when chosen, and as app stores to complete subscriptions.</li>
+        <li>RevenueCat, to manage subscriptions and entitlements.</li>
+        <li>Government or judicial authorities, where disclosure is required by law.</li>
+        <li>A party that acquires or merges with the business, subject to protecting the data and notifying the user where required.</li>
+      </ul>
+      <p>Students' data and phone numbers are not shared with anyone — because they never reach us.</p>
+    </section>
+
+    <section id="storage">
+      <h2>13. Storage, international transfer and backups</h2>
+      <p>Lesson-management data stays on your device. Account and subscription data may be processed by Google, RevenueCat and Apple on servers in the United States or elsewhere, under their terms and the contractual safeguards they apply to cross-border transfers.</p>
+      <p>Device backups: on Apple devices, if iCloud Backup is turned on for your device, your device backup includes the app's encrypted database together with its key, inside your device's encrypted backup in your Apple account, so your data comes back if you restore that backup to a new iPhone. We have no access to this backup, but anyone who can restore it from your account can restore the app's data with it; for stronger protection, turn on Advanced Data Protection for iCloud, or turn off iCloud Backup for this app in your iCloud settings if you prefer to keep it out. On Android, automatic backup of the app's data is disabled.</p>
+      <p>If the app offers backup to your own cloud account in the future, it will be encrypted and under your account only, and we will update this policy before offering it.</p>
+    </section>
+
+    <section id="retention">
+      <h2>14. Retention</h2>
+      <ul>
+        <li>Account data (email address and account ID): kept by Firebase for as long as the account exists, and deleted when the account is deleted.</li>
+        <li>Subscription records: kept by the stores and RevenueCat according to their legal and tax obligations.</li>
+        <li>Lesson-management data: stays on your device under your control until you delete it or delete the app.</li>
+      </ul>
+      <p>On Apple devices, technical values — such as the encryption key and the saved sign-in identity — may remain in the system keychain after the app is deleted; the app clears the saved sign-in identity automatically when it is reinstalled. The tutor should delete student data that is no longer needed, and export any records they need before deleting the app, because deleting it removes that data from the device permanently.</p>
+    </section>
+
+    <section id="security">
+      <h2>15. Data security</h2>
+      <ul>
+        <li>The database on the device is encrypted with AES-256, using a key generated on the device and stored in the Keychain or Keystore. On Apple devices, the key leaves the device only inside your encrypted iCloud device backup, if that is turned on.</li>
+        <li>An optional fingerprint or face lock, requested after five minutes outside the app.</li>
+        <li>Encryption in transit for sign-in and subscription requests.</li>
+      </ul>
+      <p>No method of electronic storage or transmission guarantees absolute protection. The user is responsible for protecting their device and sign-in details, and for not sharing verification codes or passwords.</p>
+    </section>
+
+    <section id="rights">
+      <h2>16. Rights of data subjects</h2>
+      <p>Under applicable law, a data subject may have the right to request access to their data, or its correction, update or deletion, to restrict or object to certain processing, or to withdraw consent.</p>
+      <ul>
+        <li>The tutor: manages students' and lessons' data directly in the app. For account and subscription data, the tutor can delete the account from the app or write to us.</li>
+        <li>A student or parent: should first contact the tutor who entered the data, because it is stored on the tutor's device and we have no access to it.</li>
+      </ul>
+      <p>For privacy requests: <a href="mailto:Faisal.z.almulhim@gmail.com">Faisal.z.almulhim@gmail.com</a>. We will ask for reasonable information to verify identity and standing, respond within the period set by applicable law, and may refuse or limit a request that conflicts with a legal obligation or another person's rights, giving the reason where required.</p>
+    </section>
+
+    <section id="delete">
+      <h2>17. Deleting your account and data</h2>
+      <p>You can delete your account from inside the app: Settings → Account → Delete account, or by sending a request to <a href="mailto:Faisal.z.almulhim@gmail.com">Faisal.z.almulhim@gmail.com</a> from the email address linked to the account. Deletion removes the account's data from Firebase, subject to the legal exceptions listed under <a href="#retention">Retention</a>.</p>
+      <p>Deleting the account does not delete the lesson-management data stored on your device — it stays under your control. Cancelling a subscription does not delete the account, and deleting the app from the device neither cancels the subscription nor deletes the account.</p>
+    </section>
+
+    <section id="cookies">
+      <h2>18. Cookies</h2>
+      <p>The app does not use cookies. The web page on which this policy is published may use strictly necessary cookies to operate, according to the hosting provider's settings.</p>
+    </section>
+
+    <section id="messages">
+      <h2>19. Messages and communications</h2>
+      <p>We do not send marketing messages. Firebase may send service messages you request, such as a password-reset link. Statements and reminders addressed to students and parents are sent by the tutor personally, through the tutor's own apps via the share menu; the app does not send them on the tutor's behalf, and the tutor is responsible for the lawfulness of sending them and for the accuracy of contact numbers.</p>
+    </section>
+
+    <section id="calendar">
+      <h2>20. Calendar and countries</h2>
+      <p>The app uses the Gregorian calendar by default and may offer the Hijri calendar depending on country settings. The device's time zone is used to display dates and schedule reminders correctly; this does not mean tracking your location.</p>
+    </section>
+
+    <section id="changes">
+      <h2>21. Changes to this policy</h2>
+      <p>We may update this policy when the app's features, service providers or legal requirements change. We will publish the updated version with a new effective date, and give appropriate notice inside the app if the change is material. Continued use after the update takes effect is subject to the updated policy, without prejudice to any new consent the law requires.</p>
+    </section>
+
+    <section id="contact">
+      <h2>22. Governing law and contact</h2>
+      <p>Data processing within the State of Qatar is subject to applicable Qatari law, including Law No. 13 of 2016 on the Protection of Personal Data Privacy, without prejudice to mandatory laws in the user's country where they apply.</p>
+      <div class="contact">
+        <p><strong>App owner:</strong> Faisal almulhem</p>
+        <p><strong>Privacy and support email:</strong> <a href="mailto:Faisal.z.almulhim@gmail.com">Faisal.z.almulhim@gmail.com</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 Tutor Manager</footer>
+</div>
+
+<!-- ============================== ARABIC ============================== -->
+<div class="lang-ar" lang="ar" dir="rtl">
+  <header>
+    <div class="header-inner">
+      <div class="header-top">
+        <p class="app-name">مدير الدروس</p>
+        <a class="lang-switch" href="?lang=en" data-set-lang="en" lang="en" hreflang="en">English</a>
+      </div>
+      <h1>سياسة الخصوصية</h1>
+      <p class="effective">تاريخ السريان: 10 سبتمبر 2026</p>
+    </div>
+  </header>
+
+  <main>
+    <p>توضّح هذه السياسة كيف يتعامل فيصل الملحم (Faisal almulhem)، ويُشار إليه فيها بلفظ «نحن»، مع البيانات عند استخدام تطبيق «مدير الدروس». صُمّم التطبيق لمساعدة المعلّمين على إدارة الطلاب والمجموعات والحصص والحضور والمدفوعات والكشوف والتذكيرات والتقارير. لا يعمل التطبيق بوصفه مدرسةً أو مزوّد خدمةٍ تعليمية، ولا يستلم رسوم الدروس ولا يحتفظ بها نيابةً عن المعلّم أو الطالب.</p>
+
+    <div class="summary">
+      <h2>الخلاصة</h2>
+      <ul>
+        <li>بيانات طلابك وحصصك ومبالغك تبقى على جهازك، مشفّرة، ولا تصل إلينا أبداً.</li>
+        <li>تسجيل الدخول اختياري. إن سجّلت الدخول نتلقّى بريدك الإلكتروني ومعرّف حسابك فقط.</li>
+        <li>الاشتراك يتمّ عبر App Store أو Google Play، ويديره RevenueCat دون أن يرى شيئاً من بيانات طلابك.</li>
+        <li>لا إعلانات، ولا تتبّع، ولا بيع للبيانات، ولا أدوات تحليلات أو تقارير أعطال.</li>
+      </ul>
+    </div>
+
+    <p>باستخدام التطبيق يقرّ المستخدم بأنه قرأ هذه السياسة. وإذا كان المعلّم يُدخل بيانات طالبٍ أو وليّ أمر، فعليه التأكّد من وجود أساسٍ قانونيٍّ مناسب لإدخالها، وإبلاغ صاحب البيانات بهذه السياسة، والحصول على موافقة وليّ الأمر عندما يكون ذلك مطلوباً، خصوصاً إذا كان الطالب قاصراً.</p>
+
+    <nav class="toc" aria-label="المحتويات">
+      <h2>المحتويات</h2>
+      <ol>
+        <li><a href="#ar-scope">نطاق السياسة</a></li>
+        <li><a href="#ar-roles">الأدوار والمسؤوليات</a></li>
+        <li><a href="#ar-data">البيانات التي نتعامل معها</a></li>
+        <li><a href="#ar-obtain">كيف نحصل على البيانات</a></li>
+        <li><a href="#ar-purposes">أغراض استخدام البيانات</a></li>
+        <li><a href="#ar-legal-basis">الأساس القانوني للمعالجة</a></li>
+        <li><a href="#ar-children">بيانات الأطفال والقاصرين</a></li>
+        <li><a href="#ar-subscriptions">الاشتراكات والمدفوعات داخل المتجر</a></li>
+        <li><a href="#ar-notifications">الإشعارات والتذكيرات</a></li>
+        <li><a href="#ar-biometric">القفل بالبصمة أو الوجه</a></li>
+        <li><a href="#ar-export">الكشوف والتصدير والمشاركة</a></li>
+        <li><a href="#ar-sharing">مشاركة البيانات</a></li>
+        <li><a href="#ar-storage">التخزين والنقل الدولي والنسخ الاحتياطي</a></li>
+        <li><a href="#ar-retention">مدة الاحتفاظ</a></li>
+        <li><a href="#ar-security">أمن البيانات</a></li>
+        <li><a href="#ar-rights">حقوق أصحاب البيانات</a></li>
+        <li><a href="#ar-delete">حذف الحساب والبيانات</a></li>
+        <li><a href="#ar-cookies">ملفات تعريف الارتباط</a></li>
+        <li><a href="#ar-messages">الرسائل والاتصالات</a></li>
+        <li><a href="#ar-calendar">التقويم والدول</a></li>
+        <li><a href="#ar-changes">التغييرات على السياسة</a></li>
+        <li><a href="#ar-contact">القانون والتواصل</a></li>
+      </ol>
+    </nav>
+
+    <section id="ar-scope">
+      <h2>1. نطاق السياسة</h2>
+      <p>تنطبق هذه السياسة على تطبيق «مدير الدروس» وخدمات الدعم المرتبطة به. ولا تنطبق على الخدمات الخارجية التي يصل إليها المستخدم من خلال روابط أو تطبيقات مستقلة — كتطبيقات المراسلة التي يختار المعلّم مشاركة الكشوف عبرها — وتخضع تلك الخدمات لسياسات الخصوصية الخاصة بها.</p>
+    </section>
+
+    <section id="ar-roles">
+      <h2>2. الأدوار والمسؤوليات</h2>
+      <p>بالنسبة إلى بيانات حساب المعلّم والاشتراك والدعم الفني، نحدّد أغراض المعالجة ووسائلها ونكون مسؤولين عنها وفق الأنظمة المنطبقة.</p>
+      <p>أما بيانات الطلاب وأولياء الأمور والحصص والمبالغ التي يُدخلها المعلّم لإدارة عمله، فتُحفظ على جهاز المعلّم وحده، ولا نعالجها على أي خادمٍ لنا ولا نستطيع الاطلاع عليها. المعلّم وحده يحدّد سبب جمعها وكيفية استخدامها، ويظلّ مسؤولاً عن دقّتها ومشروعية إدخالها وتحديد الأشخاص المخوّلين بالاطلاع عليها.</p>
+    </section>
+
+    <section id="ar-data">
+      <h2>3. البيانات التي نتعامل معها</h2>
+
+      <h3>3.1 ما يبقى على جهازك وحده — ولا يصل إلينا</h3>
+      <ul>
+        <li>بيانات المعلّم داخل التطبيق: الاسم الذي يختاره ليظهر في الكشوف، وقائمة المواد التي يدرّسها، وإعدادات اللغة والمظهر والعملة والإشعارات وسائر التفضيلات.</li>
+        <li>بيانات الطلاب وأولياء الأمور: اسم الطالب ورقم هاتفه الإلزامي، ورقم هاتف وليّ الأمر إن أدخله المعلّم (وهو اختياري)، والمرحلة والصف وسعر الحصة ومدّتها المعتادة والملاحظات، والمجموعات، وحالة الطالب (نشط أو موقوف أو مؤرشف).</li>
+        <li>الربط العائلي: حين يتكرّر رقم وليّ الأمر لأكثر من طالب، يربط التطبيقُ الأبناءَ على جهازك لإعداد كشفٍ مشتركٍ مفصّل مع مجموعٍ نهائي.</li>
+        <li>الحصص والحضور: تاريخ الحصة ووقتها ومدّتها ومادتها ونوعها، وما إذا أُعيدت جدولتها، وسجلّ الحضور والغياب والإلغاء والملاحظات.</li>
+        <li>البيانات المالية: المبالغ المستحقّة والمدفوعة وطرقها وتواريخها، والكشوف الفردية والعائلية والتقارير، وملفات PDF وExcel الناتجة عنها.</li>
+      </ul>
+      <p>تُحفظ هذه البيانات في قاعدة بياناتٍ مشفّرة على جهازك، ولا تُرسَل إلى أي خادمٍ لنا. هذه السجلّات مخصّصة للإدارة والتوثيق فقط؛ فالتطبيق لا يؤكّد أن دفعةً ماليةً تمّت فعلياً، ولا يحتفظ بأموال الطلاب أو المعلّمين في رصيدٍ أو محفظة.</p>
+
+      <h3>3.2 ما يصل إلينا أو إلى مزوّدي الخدمة</h3>
+      <ul>
+        <li>عند تسجيل الدخول — وهو اختياري: البريد الإلكتروني، ومعرّف الحساب، وطريقة الدخول (البريد، أو جوجل، أو آبل)، والاسم إن وفّره مزوّد الدخول. لا يُشترط الدخول لاستخدام أيٍّ من وظائف التطبيق.</li>
+        <li>عند الاشتراك: معرّفٌ تقنيٌّ للمشترك (مجهولٌ، أو معرّف حسابك إن كنت قد سجّلت الدخول)، والمنتج المشترى، وتواريخ الشراء والتجديد والانتهاء والإلغاء، وإيصالات المتجر. لا نستلم رقم بطاقتك ولا رمز الأمان.</li>
+        <li>بياناتٌ تقنية ترافق هذه الطلبات بطبيعتها: عنوان بروتوكول الإنترنت (IP)، ونوع نظام التشغيل وإصداره، وإصدار التطبيق ومكتباته البرمجية، ولغة الجهاز وبلد المتجر.</li>
+      </ul>
+
+      <h3>3.3 ما لا نجمعه</h3>
+      <ul>
+        <li>لا نستخدم أدوات تحليلاتٍ أو تقارير أعطال، ولا نسجّل أحداث الاستخدام داخل التطبيق.</li>
+        <li>لا نجمع معرّفات إعلانية، ولا نتتبّعك عبر تطبيقاتٍ أو مواقع أخرى.</li>
+        <li>لا نطلب الوصول إلى موقعك الجغرافي، ولا جهات الاتصال، ولا الكاميرا، ولا الميكروفون.</li>
+      </ul>
+    </section>
+
+    <section id="ar-obtain">
+      <h2>4. كيف نحصل على البيانات</h2>
+      <ul>
+        <li>مباشرةً من المعلّم عند تسجيل الدخول أو التواصل مع الدعم.</li>
+        <li>من مزوّد الدخول (جوجل أو آبل) إن اختار المعلّم الدخول عبره.</li>
+        <li>من متجر التطبيقات وRevenueCat فيما يخصّ حالة الشراء والاشتراك.</li>
+      </ul>
+      <p>أما ما يُدخله المعلّم من بياناتٍ لإدارة عمله فيبقى على جهازه، ولا نحصل عليه بأي طريقة.</p>
+    </section>
+
+    <section id="ar-purposes">
+      <h2>5. أغراض استخدام البيانات</h2>
+      <ul>
+        <li>إنشاء الحساب والتحقّق منه عند اختيار المعلّم تسجيل الدخول.</li>
+        <li>إدارة الاشتراك والتحقّق من الاستحقاق، واستعادة المشتريات، ونقل الاشتراك مع الحساب إلى جهازٍ آخر، ومنع الاحتيال.</li>
+        <li>تقديم الدعم الفني والردّ على الاستفسارات.</li>
+        <li>حماية الحسابات وأمن الخدمة.</li>
+        <li>الوفاء بالالتزامات القانونية والردّ على الطلبات النظامية وحماية حقوق المستخدمين.</li>
+      </ul>
+      <p>أما إدارة الطلاب والحصص والحضور، وإنشاء الكشوف والتقارير وملفات PDF، وجدولة التذكيرات، والربط العائلي — فكلّها تجري على جهاز المعلّم دون أن تمرّ بنا.</p>
+    </section>
+
+    <section id="ar-legal-basis">
+      <h2>6. الأساس القانوني للمعالجة</h2>
+      <p>نعالج البيانات بالقدر اللازم لتنفيذ الخدمة المطلوبة من المستخدم، وبناءً على الموافقة عندما تكون مطلوبة، ولتحقيق مصالح مشروعة مثل أمن التطبيق ومنع إساءة الاستخدام، وللوفاء بالالتزامات القانونية. يجوز للمستخدم سحب موافقته على المعالجة التي تعتمد عليها، دون أن يؤثّر ذلك في مشروعية المعالجة السابقة أو في البيانات الواجب الاحتفاظ بها قانوناً.</p>
+    </section>
+
+    <section id="ar-children">
+      <h2>7. بيانات الأطفال والقاصرين</h2>
+      <p>التطبيق موجّه للمعلّمين وليس للأطفال لإنشاء حساباتٍ مستقلّة. قد يُدخل المعلّم بيانات طلابٍ قاصرين لإدارة دروسه، وهذه البيانات تبقى على جهازه ولا تصل إلينا. يجب على المعلّم الاقتصار على البيانات الضرورية، وإبلاغ وليّ الأمر والحصول على موافقته عندما يقتضي القانون أو طبيعة العلاقة ذلك. لا نستخدم بيانات الطلاب لأي تسويقٍ أو لبناء ملفّاتٍ إعلانية — ولا نملك الوصول إليها أصلاً.</p>
+      <p>إذا أراد وليّ الأمر مراجعة بيانات طفله أو حذفها، فالطريق هو المعلّم الذي أدخلها، لأنها محفوظة على جهازه. ويمكن لوليّ الأمر مراسلتنا إن تعذّر ذلك، وسنساعد بما نستطيع ضمن حدود أننا لا نملك تلك البيانات.</p>
+    </section>
+
+    <section id="ar-subscriptions">
+      <h2>8. الاشتراكات والمدفوعات داخل المتجر</h2>
+      <p>تتمّ اشتراكات التطبيق من خلال Apple App Store أو Google Play، وتخضع عملية الدفع والتجديد والإلغاء والاسترداد لشروط المتجر المعنيّ وسياساته. نستخدم RevenueCat لإدارة حالة الاشتراك والاستحقاقات، ويتلقّى المعرّف التقني للمشترك وبيانات المنتج والشراء والتجديد والإلغاء اللازمة لتشغيل الاشتراك — ولا يتلقّى أي شيءٍ من بيانات طلابك أو حصصك.</p>
+      <p>يمكن الاشتراك دون تسجيل الدخول، واستعادة الاشتراك بعد إعادة تثبيت التطبيق من خلال «استعادة المشتريات». ويُلغى الاشتراك من إعدادات الاشتراكات في المتجر، لا من داخل التطبيق.</p>
+    </section>
+
+    <section id="ar-notifications">
+      <h2>9. الإشعارات والتذكيرات</h2>
+      <p>التذكيرات محلّية: يجدولها التطبيق على جهازك مباشرةً، ولا يُنشئ رمز إشعاراتٍ للإرسال من خادم، ولا يُرسل مواعيدك إلى أي جهة. يمكن اختيار «الوضع المستتر» لإخفاء أسماء الطلاب والمبالغ من نصّ الإشعار على شاشة القفل، ويمكن إيقاف الإشعارات من إعدادات التطبيق أو الجهاز. إيقافها لا يحذف الموعد أو السجل، لكنه يمنع وصول التذكير. وقد تتأثّر مواعيد الظهور بإعدادات الجهاز وقيود نظام التشغيل.</p>
+    </section>
+
+    <section id="ar-biometric">
+      <h2>10. القفل بالبصمة أو الوجه</h2>
+      <p>إذا فعّل المعلّم القفل الحيوي، يتولّى نظام التشغيل التحقّق (بصمة الإصبع أو الوجه أو رمز الجهاز). لا يستلم التطبيق أي بياناتٍ حيوية، ولا تصل إلينا بأي حال.</p>
+    </section>
+
+    <section id="ar-export">
+      <h2>11. الكشوف والتصدير والمشاركة</h2>
+      <p>تُنشأ الكشوف وملفات PDF وExcel على جهازك. ولا تغادره إلا حين يختار المعلّم مشاركتها بنفسه عبر قائمة المشاركة في النظام — كإرسالها عبر تطبيق مراسلة — وعندئذٍ تخضع لسياسة ذلك التطبيق. تُحذف النسخ المؤقتة من الملفات المصدَّرة من الجهاز تلقائياً عند فتح التطبيق بعد مرور 12 ساعة على إنشائها.</p>
+    </section>
+
+    <section id="ar-sharing">
+      <h2>12. مشاركة البيانات</h2>
+      <p>لا نبيع البيانات الشخصية. ولا نشارك إلا الحدّ الأدنى اللازم مع الجهات التالية:</p>
+      <ul>
+        <li>Google Firebase لتسجيل الدخول والتحقّق من الحساب — يتلقّى البريد ومعرّف الحساب وطريقة الدخول.</li>
+        <li>آبل وجوجل بصفتهما مزوّدَي دخولٍ عند اختيارهما، ومتجرَي تطبيقاتٍ لإتمام الاشتراك.</li>
+        <li>RevenueCat لإدارة الاشتراكات والاستحقاقات.</li>
+        <li>الجهات الحكومية أو القضائية عندما يكون الإفصاح مطلوباً قانوناً.</li>
+        <li>جهةٌ تستحوذ على النشاط أو تندمج معه، مع الالتزام بحماية البيانات وإخطار المستخدم عندما يلزم.</li>
+      </ul>
+      <p>بيانات الطلاب وأرقامهم لا تُشارَك مع أحد — لأنها لا تصل إلينا أصلاً.</p>
+    </section>
+
+    <section id="ar-storage">
+      <h2>13. التخزين والنقل الدولي والنسخ الاحتياطي</h2>
+      <p>تبقى بيانات إدارة الدروس على جهازك. أما بيانات الحساب والاشتراك فقد يعالجها Google وRevenueCat وآبل على خوادم في الولايات المتحدة أو غيرها، وفق شروطهم والتدابير التعاقدية التي يطبّقونها لنقل البيانات عبر الحدود.</p>
+      <p>نسخ الجهاز الاحتياطية: على أجهزة آبل، إذا كان النسخ الاحتياطي إلى iCloud مفعّلاً لجهازك، فتتضمّن نسخةُ جهازك قاعدةَ البيانات المشفّرة ومفتاحَها معاً، ضمن نسخة جهازك المشفّرة في حسابك لدى آبل، فتعود بياناتك إن استعدت النسخة على آيفون جديد. لا نملك الوصول إلى هذه النسخة، لكن من يستطيع استعادتها من حسابك يستطيع استعادة بيانات التطبيق معها؛ ولحمايةٍ أقوى فعّل «حماية البيانات المتقدّمة» في iCloud، أو أوقف النسخ الاحتياطي لهذا التطبيق من إعدادات iCloud إن أردت إبقاءه خارجها. وعلى أندرويد، النسخ الاحتياطي التلقائي لبيانات التطبيق معطَّل.</p>
+      <p>إذا أتاح التطبيق مستقبلاً نسخاً احتياطياً إلى حسابك السحابي، فسيكون مشفّراً وتحت حسابك وحدك، وسنحدّث هذه السياسة قبل إتاحته.</p>
+    </section>
+
+    <section id="ar-retention">
+      <h2>14. مدة الاحتفاظ</h2>
+      <ul>
+        <li>بيانات الحساب (البريد ومعرّف الحساب): تُحفظ لدى Firebase ما دام الحساب قائماً، وتُحذف عند حذفه.</li>
+        <li>سجلّات الاشتراك: تحتفظ بها المتاجر وRevenueCat وفق التزاماتها القانونية والضريبية.</li>
+        <li>بيانات إدارة الدروس: تبقى على جهازك تحت تصرّفك حتى تحذفها أو تحذف التطبيق.</li>
+      </ul>
+      <p>على أجهزة آبل، قد تبقى في سلسلة مفاتيح النظام بعد حذف التطبيق قيمٌ تقنية — كمفتاح التشفير وهوية الدخول المحفوظة — ويمسح التطبيق هوية الدخول تلقائياً عند إعادة تثبيته. وعلى المعلّم حذف بيانات الطلاب التي لم تعد لازمة، وتصدير ما يحتاجه من سجلّاتٍ قبل حذف التطبيق، لأن حذفه يُزيل تلك البيانات من الجهاز بصورةٍ غير قابلة للاسترجاع.</p>
+    </section>
+
+    <section id="ar-security">
+      <h2>15. أمن البيانات</h2>
+      <ul>
+        <li>تُشفَّر قاعدة البيانات على الجهاز بمعيار AES-256، بمفتاحٍ يُولَّد على الجهاز ويُحفظ في سلسلة المفاتيح (Keychain) أو مخزن المفاتيح (Keystore). وعلى أجهزة آبل لا يغادر المفتاحُ الجهازَ إلا ضمن نسخة iCloud المشفّرة لجهازك، إن كانت مفعّلة.</li>
+        <li>قفلٌ اختياري بالبصمة أو الوجه يُطلب بعد خمس دقائق خارج التطبيق.</li>
+        <li>تشفير الاتصال أثناء النقل لطلبات الدخول والاشتراك.</li>
+      </ul>
+      <p>ومع ذلك، لا توجد وسيلة تخزينٍ أو نقلٍ إلكتروني تضمن الحماية المطلقة. يتحمّل المستخدم مسؤولية حماية جهازه وبيانات الدخول، وعدم مشاركة رمز التحقّق أو كلمة المرور.</p>
+    </section>
+
+    <section id="ar-rights">
+      <h2>16. حقوق أصحاب البيانات</h2>
+      <p>وفق القانون المنطبق، قد يحقّ لصاحب البيانات طلب الوصول إلى بياناته أو تصحيحها أو تحديثها أو حذفها أو تقييد بعض أوجه معالجتها أو الاعتراض عليها أو سحب الموافقة.</p>
+      <ul>
+        <li>المعلّم: يدير بيانات طلابه وحصصه مباشرةً من التطبيق. ولبيانات حسابه واشتراكه يستطيع حذف الحساب من التطبيق أو مراسلتنا.</li>
+        <li>الطالب أو وليّ الأمر: يتواصل أولاً مع المعلّم الذي أدخل البيانات، لأنها محفوظة على جهازه ولا نملك الوصول إليها.</li>
+      </ul>
+      <p>للطلبات المتعلّقة بالخصوصية: <a href="mailto:Faisal.z.almulhim@gmail.com" dir="ltr">Faisal.z.almulhim@gmail.com</a>. سنطلب معلوماتٍ معقولة للتحقّق من الهوية والصفة، ونردّ خلال المدّة التي يقرّرها القانون المنطبق، وقد نرفض الطلب أو نقيّده إذا تعارض مع التزامٍ قانوني أو حقوق شخصٍ آخر، مع بيان السبب حيثما يلزم.</p>
+    </section>
+
+    <section id="ar-delete">
+      <h2>17. حذف الحساب والبيانات</h2>
+      <p>يمكن حذف الحساب من داخل التطبيق: الإعدادات ← الحساب ← حذف الحساب، أو بإرسال طلبٍ إلى <a href="mailto:Faisal.z.almulhim@gmail.com" dir="ltr">Faisal.z.almulhim@gmail.com</a> من البريد المرتبط بالحساب. يؤدّي الحذف إلى إزالة بيانات الحساب لدى Firebase، مع الاستثناءات النظامية المذكورة في <a href="#ar-retention">بند مدة الاحتفاظ</a>.</p>
+      <p>حذف الحساب لا يحذف بيانات إدارة الدروس المحفوظة على جهازك — فهي تبقى تحت تصرّفك. كما أن إلغاء الاشتراك لا يعني حذف الحساب، وحذف التطبيق من الجهاز لا يُلغي الاشتراك ولا يحذف الحساب.</p>
+    </section>
+
+    <section id="ar-cookies">
+      <h2>18. ملفات تعريف الارتباط</h2>
+      <p>لا يستخدم التطبيق ملفات تعريف الارتباط. وقد تستخدم الصفحة التي تُنشر عليها هذه السياسة ملفاتٍ ضروريةً فقط لتشغيلها، وفق إعدادات مزوّد الاستضافة.</p>
+    </section>
+
+    <section id="ar-messages">
+      <h2>19. الرسائل والاتصالات</h2>
+      <p>لا نرسل رسائل تسويقية. قد يرسل Firebase رسائل خدمية حين تطلبها، كرابط إعادة تعيين كلمة المرور. أما الكشوف والتذكيرات الموجّهة إلى الطلاب وأولياء الأمور، فيرسلها المعلّم بنفسه عبر تطبيقاته من خلال قائمة المشاركة؛ والتطبيق لا يرسلها نيابةً عنه، والمعلّم مسؤولٌ عن مشروعية إرسالها وعن صحّة أرقام الاتصال.</p>
+    </section>
+
+    <section id="ar-calendar">
+      <h2>20. التقويم والدول</h2>
+      <p>يعتمد التطبيق التقويم الميلادي أساساً، وقد يتيح التقويم الهجري بحسب إعدادات البلد. تُستخدم المنطقة الزمنية للجهاز لعرض التواريخ وجدولة التذكيرات بصورةٍ صحيحة، ولا يعني ذلك تتبّع الموقع الجغرافي.</p>
+    </section>
+
+    <section id="ar-changes">
+      <h2>21. التغييرات على السياسة</h2>
+      <p>قد نحدّث هذه السياسة عند تغيير وظائف التطبيق أو مقدّمي الخدمة أو المتطلّبات القانونية. سننشر النسخة المحدّثة مع تاريخ سريانٍ جديد، ونقدّم إشعاراً مناسباً داخل التطبيق إذا كان التغيير جوهرياً. استمرار الاستخدام بعد سريان التحديث يخضع للسياسة المحدّثة، دون الإخلال بالموافقات الجديدة التي يتطلّبها القانون.</p>
+    </section>
+
+    <section id="ar-contact">
+      <h2>22. القانون والتواصل</h2>
+      <p>تخضع معالجة البيانات داخل دولة قطر للقوانين القطرية المنطبقة، ومنها قانون حماية خصوصية البيانات الشخصية رقم 13 لسنة 2016، دون الإخلال بالقوانين الإلزامية في بلد المستخدم عند انطباقها.</p>
+      <div class="contact">
+        <p><strong>مالك التطبيق:</strong> فيصل الملحم (Faisal almulhem)</p>
+        <p><strong>بريد الخصوصية والدعم:</strong> <a href="mailto:Faisal.z.almulhim@gmail.com" dir="ltr">Faisal.z.almulhim@gmail.com</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 مدير الدروس</footer>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var TITLES = { en: 'Privacy Policy — Tutor Manager', ar: 'سياسة الخصوصية — مدير الدروس' };
+
+    // Section ids: English uses "delete", Arabic uses "ar-delete".
+    function counterpart(id, lang) {
+      var base = id.replace(/^ar-/, '');
+      return lang === 'ar' ? 'ar-' + base : base;
+    }
+
+    function currentSectionId(lang) {
+      var found = null;
+      var secs = document.querySelectorAll('.lang-' + lang + ' section[id]');
+      for (var i = 0; i < secs.length; i++) {
+        if (secs[i].getBoundingClientRect().top <= 80) found = secs[i].id;
+      }
+      return found;
+    }
+
+    function jumpTo(id) {
+      var el = id && document.getElementById(id);
+      if (!el) return false;
+      root.style.scrollBehavior = 'auto';
+      el.scrollIntoView();
+      root.style.scrollBehavior = '';
+      return true;
+    }
+
+    function setLang(lang) {
+      var cur = root.getAttribute('data-lang');
+      if (cur === lang) return;
+      var sectionId = currentSectionId(cur);
+
+      root.setAttribute('data-lang', lang);
+      root.lang = lang;
+      root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      document.title = TITLES[lang];
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+
+      var hash = location.hash ? '#' + counterpart(location.hash.slice(1), lang) : '';
+      try { history.replaceState(null, '', '?lang=' + lang + hash); } catch (e) {}
+
+      // Keep the reader at the same section in the other language.
+      if (!jumpTo(sectionId && counterpart(sectionId, lang))) window.scrollTo(0, 0);
+    }
+
+    document.querySelectorAll('[data-set-lang]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        setLang(a.getAttribute('data-set-lang'));
+      });
+    });
+
+    // A link like #delete opened in Arabic (or #ar-delete in English) → go to the matching section.
+    if (location.hash) {
+      var lang = root.getAttribute('data-lang');
+      var target = counterpart(location.hash.slice(1), lang);
+      if (target !== location.hash.slice(1)) {
+        try { history.replaceState(null, '', location.pathname + location.search + '#' + target); } catch (e) {}
+        jumpTo(target);
+      }
+    }
+  })();
+</script>
+</body>
+</html>
